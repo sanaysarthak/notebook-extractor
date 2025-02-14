@@ -33,7 +33,11 @@ def save_code_cells_to_files(code_cells, output_folder):
 
 def main():
     # Taking user input for notebook file path
-    notebook_file_path = input("Enter path of notebook: ")
+    notebook_file_path = input("Enter path of notebook: ").strip()
+
+    # Check if the path is relative or absolute
+    if not os.path.isabs(notebook_file_path):
+        notebook_file_path = os.path.abspath(notebook_file_path) # Convert relative path to absolute path
 
     # Generating output folder name
     base_filename = os.path.splitext(os.path.basename(notebook_file_path))[0]
