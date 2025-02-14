@@ -37,7 +37,7 @@ def main():
 
     # Generating output folder name
     base_filename = os.path.splitext(os.path.basename(notebook_file_path))[0]
-    output_folder = f"output - {base_filename}"
+    output_folder = os.path.join("Outputs", base_filename)  # Output/<notebook_name>/ 
 
     # Calling function to extract code cells
     code_cells = extract_code_cells(notebook_file_path)
