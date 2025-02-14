@@ -49,10 +49,13 @@ def save_code_cells_to_files(code_cells, output_folder):
             file.write(code)
         print(f"Saved code cell {index} to {file_path}")
 
+    # Display no. of total files saved to user after all process ends.
+    print(f"\nProcess complete! {len(code_cells)} code cells were extracted and saved.")
 
 def main():
     # Taking user input for notebook file path
     notebook_file_path = input("Enter path of notebook: ").strip()
+    print() # To add a newline
 
     # Check if the path is relative or absolute
     if not os.path.isabs(notebook_file_path):
