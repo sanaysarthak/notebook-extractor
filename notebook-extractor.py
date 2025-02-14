@@ -1,5 +1,13 @@
 import os
 import nbformat
+import re
+
+# Function to sanitize folder names by removing invalid characters
+def sanitize_folder_name(folder_name):
+    # Regular expression pattern to match invalid characters
+    invalid_chars = r'[<>:"/\\|?*]'
+    sanitized_name = re.sub(invalid_chars, '_', folder_name)  # Replace invalid chars with underscore '_'
+    return sanitized_name
 
 # Function to extract all the code cells, where we are passing the file path as parameter and are returning a list of code cell contents as strings.
 def extract_code_cells(notebook_file_path):
@@ -57,7 +65,8 @@ def main():
 
     # Generating output folder name
     base_filename = os.path.splitext(os.path.basename(notebook_file_path))[0]
-    output_folder = os.path.join("Outputs", base_filename)  # Output/<notebook_name>/ 
+    sanitized_folder_name = sanitize_folder_name(base_filename)  # Sanitize the folder name
+    output_folder = os.path.join("Outputs", sanitized_folder_name)  # Outputs/<sanitized_notebook_name>/ 
 
     # Calling function to extract code cells
     code_cells = extract_code_cells(notebook_file_path)
