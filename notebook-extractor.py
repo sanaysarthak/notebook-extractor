@@ -31,16 +31,21 @@ def save_code_cells_to_files(code_cells, output_folder):
             file.write(code)
         print(f"Saved code cell {index} to {file_path}")
 
+def main():
+    # Taking user input for notebook file path
+    notebook_file_path = input("Enter path of notebook: ")
 
-# Taking user input for notebook file path
-notebook_file_path = input("Enter path of notebook: ")
+    # Generating output folder name
+    base_filename = os.path.splitext(os.path.basename(notebook_file_path))[0]
+    output_folder = f"output - {base_filename}"
 
-# Generating output folder name
-base_filename = os.path.splitext(os.path.basename(notebook_file_path))[0]
-output_folder = f"output - {base_filename}"
+    # Calling function to extract code cells
+    code_cells = extract_code_cells(notebook_file_path)
 
-# Calling function to extract code cells
-code_cells = extract_code_cells(notebook_file_path)
+    # Calling function to save code cells to files
+    save_code_cells_to_files(code_cells, output_folder)
 
-# Calling function to save code cells to files
-save_code_cells_to_files(code_cells, output_folder)
+
+# add dunder main prevent unintended execution of the program
+if __name__ == "__main__":
+    main()
